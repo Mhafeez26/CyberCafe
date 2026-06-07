@@ -49,9 +49,9 @@ public class DashboardFrame extends JFrame{
         sidebar.add(logo);
 
         String[] pages ={
-                "Dashboard","Computer Mgmt","Customer Mgmt",
-                "Session Mgmt","Billing","Reservations",
-                "Employee Mgmt","Reports","Settings","Logout"
+                "Dashboard","Computer Management","Customer Management",
+                "Session Management","Billing","Reservations",
+                "Employee Management","Reports","Settings","Logout"
         };
 
         for (String page : pages){
