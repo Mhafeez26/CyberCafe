@@ -27,7 +27,8 @@ public class BillingPanel extends JPanel {
         title.setBorder(BorderFactory.createEmptyBorder(0, 0, 6, 0));
         add(title, BorderLayout.NORTH);
 
-        // Columns: Session ID, PC, Customer, Start Time, Hrs, Rate/hr, Subtotal, Disc%, Tax%, Surcharge, Total
+
+
         String[] cols = {"Session ID", "PC", "Customer", "Start Time", "Hrs", "Rate/hr",
                 "Subtotal", "Disc%", "Tax%", "Surcharge", "Total"};
         tableModel = new DefaultTableModel(cols, 0) {
@@ -88,7 +89,6 @@ public class BillingPanel extends JPanel {
                 int    pcId     = rs.getInt(7);
                 int    custId   = rs.getInt(8);
 
-                // Check if this session has a reservation surcharge
                 double surcharge = (custId != 0 && reservationBackend.hasReservationSurcharge(pcId, custId))
                         ? ReservationBackend.RESERVATION_SURCHARGE : 0.0;
 
