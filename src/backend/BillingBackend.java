@@ -5,7 +5,6 @@ import observer.SessionEventPublisher;
 import util.ExceptionHandler;
 import java.sql.*;
 
-// Backend: billing calculation, session end, receipt data
 public class BillingBackend {
 
     private final Connection conn;
@@ -24,8 +23,6 @@ public class BillingBackend {
         }
         return 0;
     }
-
-    // Active sessions with billing info — includes computer_id and customer_id for surcharge check
     public ResultSet getActiveSessionsForBilling() {
         try {
             return conn.createStatement().executeQuery(
@@ -62,12 +59,11 @@ public class BillingBackend {
                 upd.setInt(1, pcId);
                 upd.executeUpdate();
 
-                // Mark any matching reservation as Completed
+
                 if (custId != 0) {
                     reservationBackend.completeReservation(pcId, custId);
                 }
 
-                // Design Pattern: OBSERVER — session khatam hone par notify
                 SessionEventPublisher.getInstance().notifySessionEnded(pcId);
             }
             return true;
@@ -90,11 +86,8 @@ public class BillingBackend {
         return new String[]{"Cyber Cafe", "PKR", "Thank you!"};
     }
 
-    /**
-     * Calculates the bill.
-     * @param reservationSurcharge  extra flat charge if session was reserved (0 if not)
-     * Returns: [hours, subtotal, discAmt, taxAmt, surcharge, total]
-     */
+
+
     public double[] calculateBill(double hourlyRate, long startMs,
                                   double discountPercent, double taxPercent,
                                   double reservationSurcharge) {
