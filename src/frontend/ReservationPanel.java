@@ -95,7 +95,6 @@ public class ReservationPanel extends JPanel {
 
         add(topArea, BorderLayout.NORTH);
 
-        // ── CENTER: table ──
         String[] cols = {"ID", "PC", "Customer", "Start Time", "End Time", "Status"};
         tableModel = new DefaultTableModel(cols, 0) {
             public boolean isCellEditable(int r, int c) { return false; }
