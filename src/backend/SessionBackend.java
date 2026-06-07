@@ -14,21 +14,19 @@ public class SessionBackend {
         conn = DBConnection.getInstance().getConnection();
     }
 
-    /**
-     * Starts a session. Blocks if the PC is currently reserved by another customer.
-     * If this customer has a matching reservation, the session is allowed and the
-     * reservation is marked as 'Completed' upon session end.
-     */
+
+
     public boolean startSession(int pcId, int customerId) {
         try {
-            // Block if PC is reserved right now and this is a walk-in (customerId == 0)
+
             if (customerId == 0 && reservationBackend.isPcReservedNow(pcId)) {
                 ExceptionHandler.handleValidationError(
                         "This PC is currently reserved. It cannot be used for a walk-in session.", null);
                 return false;
             }
 
-            // Block if PC is reserved for a different customer right now
+
+
             if (customerId != 0 && reservationBackend.isPcReservedNow(pcId)
                     && !reservationBackend.hasReservationSurcharge(pcId, customerId)) {
                 ExceptionHandler.handleValidationError(
@@ -47,7 +45,7 @@ public class SessionBackend {
             upd.setInt(1, pcId);
             upd.executeUpdate();
 
-            // Design Pattern: OBSERVER — session start hone par saare observers ko notify karo
+//design pattern observer
             SessionEventPublisher.getInstance().notifySessionStarted(pcId);
             return true;
         } catch (SQLException e) {
