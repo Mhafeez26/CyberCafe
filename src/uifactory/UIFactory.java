@@ -11,17 +11,16 @@ public class UIFactory {
     public static JTable createTable(DefaultTableModel model) {
         JTable table = new JTable(model) {
 
-
             @Override
             public Component prepareRenderer(TableCellRenderer r, int row, int col) {
                 Component c = super.prepareRenderer(r, row, col);
                 if (!isRowSelected(row)) {
-                    c.setBackground(row % 2 == 0 ? UIConstants.PANEL_BG : UIConstants.TABLE_ROW_ALT);
+                    c.setBackground(UIConstants.PANEL_BG); // same color for all rows
+                    c.setForeground(Color.DARK_GRAY);
                 } else {
                     c.setBackground(UIConstants.SECONDARY);
                     c.setForeground(UIConstants.TEXT_ON_PRIMARY);
                 }
-                if (!isRowSelected(row)) c.setForeground(Color.DARK_GRAY);
                 c.setFont(UIConstants.FONT_TABLE_CELL);
                 return c;
             }
@@ -37,16 +36,12 @@ public class UIFactory {
         table.setSelectionForeground(UIConstants.TEXT_ON_PRIMARY);
         table.setFillsViewportHeight(true);
 
-
         JTableHeader header = table.getTableHeader();
         header.setBackground(UIConstants.PRIMARY);
         header.setForeground(UIConstants.TEXT_ON_PRIMARY);
-
         header.setFont(UIConstants.FONT_TABLE_HEADER);
         header.setPreferredSize(new Dimension(0, 36));
         header.setReorderingAllowed(false);
-
-
 
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -75,10 +70,9 @@ public class UIFactory {
         btn.setBorderPainted(false);
         btn.setOpaque(true);
         btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btn.setPreferredSize(new Dimension(100, 32));
+        btn.setMargin(new Insets(4, 12, 4, 12)); // padding so text fits naturally
         return btn;
     }
-
 
     public static JButton createSecondaryButton(String text) {
         JButton btn = new JButton(text);
@@ -89,7 +83,7 @@ public class UIFactory {
         btn.setBorderPainted(false);
         btn.setOpaque(true);
         btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btn.setPreferredSize(new Dimension(100, 32));
+        btn.setMargin(new Insets(4, 12, 4, 12));
         return btn;
     }
 
@@ -102,17 +96,16 @@ public class UIFactory {
         btn.setBorderPainted(false);
         btn.setOpaque(true);
         btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btn.setPreferredSize(new Dimension(100, 32));
+        btn.setMargin(new Insets(4, 12, 4, 12));
         return btn;
     }
-
 
     public static JButton createNeutralButton(String text) {
         JButton btn = new JButton(text);
         btn.setFont(UIConstants.FONT_BUTTON);
         btn.setFocusPainted(false);
         btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btn.setPreferredSize(new Dimension(100, 32));
+        btn.setMargin(new Insets(4, 12, 4, 12));
         return btn;
     }
 
@@ -200,7 +193,6 @@ public class UIFactory {
         return p;
     }
 
-
     public static JPanel createButtonPanel() {
         JPanel p = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 4));
         p.setBackground(UIConstants.PANEL_BG);
@@ -220,7 +212,6 @@ public class UIFactory {
 
         JLabel lblName = new JLabel(label, SwingConstants.CENTER);
         lblName.setFont(UIConstants.FONT_STAT_LABEL);
-
 
         JPanel topBar = new JPanel();
         topBar.setBackground(UIConstants.PRIMARY);
@@ -247,7 +238,6 @@ public class UIFactory {
         btn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         return btn;
     }
-
 
 
     //layout helpers
