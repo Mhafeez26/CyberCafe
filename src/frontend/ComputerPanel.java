@@ -114,7 +114,7 @@ public class ComputerPanel extends JPanel {
             String name   = txtGame.getText().trim();
             String pcStr  = (String) cbPC.getSelectedItem();
             if (!ExceptionHandler.validateNotEmpty(name, "Game Name", this)) return;
-            if (pcStr == null) { ExceptionHandler.handleValidationError("PC select karein.", this); return; }
+            if (pcStr == null) { ExceptionHandler.handleValidationError("Please Select PC.", this); return; }
             int pcId = Integer.parseInt(pcStr.split(" - ")[0]);
             if (backend.addGame(name, pcId)) { txtGame.setText(""); loadGames(gModel); }
         });
