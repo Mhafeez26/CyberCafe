@@ -27,7 +27,6 @@ public class ReservationPanel extends JPanel {
         setBackground(UIConstants.CONTENT_BG);
         setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
-        // ── TOP: form + surcharge note stacked ──
         JPanel topArea = new JPanel(new BorderLayout(0, 4));
         topArea.setBackground(UIConstants.CONTENT_BG);
 
@@ -62,7 +61,9 @@ public class ReservationPanel extends JPanel {
         g.anchor = GridBagConstraints.WEST;
         g.fill   = GridBagConstraints.NONE;
 
-        // Row 0: fields
+
+
+
         g.gridy = 0;
         g.gridx = 0; form.add(UIFactory.createFormLabel("PC:"), g);
         g.gridx = 1; form.add(cbPC, g);
@@ -73,8 +74,10 @@ public class ReservationPanel extends JPanel {
         g.gridx = 6; form.add(UIFactory.createFormLabel("End Time:"), g);
         g.gridx = 7; form.add(spinEnd, g);
 
-        // Row 1: buttons aligned left
+
+
         g.gridy  = 1;
+
         g.gridx  = 0;
         g.gridwidth = 2;
         form.add(btnBook, g);
@@ -159,7 +162,7 @@ public class ReservationPanel extends JPanel {
         int pcId   = Integer.parseInt(pcStr.split(" - ")[0]);
         int custId = Integer.parseInt(custStr.split(" - ")[0]);
 
-        if (backend.bookReservation(pcId, custId, startDate, endDate)) {
+        if (backend.bookReservation(pcId, custId, (java.sql.Date) startDate, (java.sql.Date) endDate)) {
             JOptionPane.showMessageDialog(this,
                     "Reservation booked successfully!\nSurcharge of PKR " +
                             (int) ReservationBackend.RESERVATION_SURCHARGE + " will be added at billing.");
